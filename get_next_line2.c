@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:21:55 by tigerber          #+#    #+#             */
-/*   Updated: 2021/01/21 15:58:12 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/01/21 16:02:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 char		*newbuff(char *buff)
 {
 	int i;
-	char *newbuff;
 
 	i = 0;
-	if (!(newbuff = malloc(sizeof(char) * (ft_strlen(buff)) + 1)))
-		return (NULL);
 	while (buff[i])
 	{
 		if (buff[i] == '\n')
@@ -95,6 +92,7 @@ char		*get_first_line(int fd, char *buff)
 		{
 			if (buff[i] == '\n')
 			{
+				buff = newbuff(buff);
 				printf("newbuff = [%s]\n", buff);
 				return (str);
 			}
@@ -111,8 +109,6 @@ int		get_next_line(int fd, char **line)
 
 	buff[BUFF] = '\0';
 	*line = get_first_line(fd, buff);
-	buff = get_first_line(fd, buff);
-	
 	printf("buff de get = [%s]\n", buff);
 	printf("line  = [%s]\n", *line);
 	printf("============================================================\n");
