@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 13:21:55 by tigerber          #+#    #+#             */
-/*   Updated: 2021/01/22 13:13:41 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/01/22 13:31:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,7 @@ char		*get_first_line(int fd, char *buff,char **line,char *temp)
 	}
 	while ((ret = read(fd, buff, BUFF)))
 	{
-		if (ret == 0)
-		{
-			printf("ret = [%d]\n", ret);
-			return (0);
-		}
+		printf("ret = [%d]\n", ret);
 		str = ft_strjoin(str, buff);
 		while (buff[i] && i < ret)
 		{
@@ -126,7 +122,7 @@ char		*get_first_line(int fd, char *buff,char **line,char *temp)
 		}
 		i = 0;
 	}
-	return (buff);
+	return (NULL);
 }
 
 char		*get_temp_line(char *temp, char **line)
@@ -152,6 +148,8 @@ int		get_next_line(int fd, char **line)
 	if (temp == NULL)
 	{
 		temp = get_first_line(fd, buff, line, temp);
+		if (temp == NULL)
+			return (0);
 		printf ("temp GFL = [%s]\n", temp);
 		return (1);
 	}
