@@ -6,7 +6,7 @@
 /*   By: tigerber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 16:30:12 by tigerber          #+#    #+#             */
-/*   Updated: 2021/01/27 16:40:08 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/01/29 15:33:47 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -18,14 +18,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
+size_t	ft_strlen(char *s);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_first_line(int fd, char *buff, char **line, char *temp);
-char	*get_temp_line(char *temp, char **line);
-size_t	ft_strlen(const char *s);
-char	*ft_strndup(char *str, int len);
-char	*newrest(char *str);
+char	*ft_strnew(void);
+char	*ft_newrest(char *str);
 int		ft_tempavbs(char *temp);
+char	*ft_lineintemp(char *temp);
 int		get_next_line(int fd, char **line);
 
 #endif

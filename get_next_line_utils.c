@@ -3,66 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/27 15:56:39 by tigerber          #+#    #+#             */
-/*   Updated: 2021/01/27 16:37:34 by tigerber         ###   ########.fr       */
+/*   Created: 2021/01/28 11:36:57 by tigerber          #+#    #+#             */
+/*   Updated: 2021/01/29 16:14:34 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t  ft_strlen(const char *s)
+size_t		ft_strlen(char *s)
 {
-    int i;
-
-    i = 0;
-    while (s[i] != '\0')
-    {
-        i++;
-    }
-    return (i);
-}
-
-char	*ft_strndup(char *str, int len)
-{
-	int i;
-	char *dest;
+	int		i;
 
 	i = 0;
-	if (!(dest = malloc(sizeof(char) * len + 1)))
+	while (s && s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+char		*ft_strjoin(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	while (str[i] != '\0' && i < len)
+	if (!(str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1)))
+		return (NULL);
+	while (s1[j] != '\0')
 	{
-		dest[i] = str[i];
+		str[i] = s1[j];
 		i++;
+		j++;
 	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char		*newrest(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
+	j = 0;
+	while (s2[j] != '\0')
 	{
-		if (str[i] == '\n')
-		{
-			return (&str[i + 1]);
-		}
-		i++;
+		str[i++] = s2[j++];
 	}
+	str[i] = '\0';
 	return (str);
 }
 
-int		ft_tempavbs(char *temp)
+int			ft_tempavbs(char *temp)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (temp[i])
+	while (temp && temp[i])
 	{
 		if (temp[i] == '\n')
 		{
@@ -71,4 +65,49 @@ int		ft_tempavbs(char *temp)
 		i++;
 	}
 	return (0);
+}
+
+char		*ft_strdup(const char *s1)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (!(str = malloc(sizeof(char) * ft_strlen((char*)s1) + 1)))
+	{
+		return (NULL);
+	}
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char		*ft_newrest(char *str)
+{
+	char	*dest;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (ft_tempavbs(str))
+	{
+		while (str && str[i] != '\n' && str[i] != '\0')
+			i++;
+		dest = ft_strdup(&str[i + 1]);
+		i = 0;
+		while (dest[i])
+		{
+			str[i] = dest[i];
+			i++;
+		}
+		str[i] = '\0';
+		free(dest);
+		return (str);
+	}
+	return (NULL);
 }
